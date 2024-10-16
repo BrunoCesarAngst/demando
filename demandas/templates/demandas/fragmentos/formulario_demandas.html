@@ -1,0 +1,11 @@
+{#} /home/bruno/demando/demandas/templates/demandas/fragmentos/formulario_demandas.html {#}
+
+<div class="bg-white rounded-lg shadow p-6">
+    <h2 class="text-xl font-semibold mb-4">Adicionar Nova Demanda</h2>
+    <form hx-post="{% url 'adicionar_demanda' %}" hx-target="#lista-demandas" hx-swap="beforeend" class="space-y-4">
+        {% csrf_token %}
+        <input type="text" name="titulo" placeholder="Título da Demanda" class="border p-2 w-full rounded" required>
+        <textarea name="descricao" placeholder="Descrição" class="border p-2 w-full rounded" required></textarea>
+        <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded">Adicionar Demanda</button>
+    </form>
+</div>

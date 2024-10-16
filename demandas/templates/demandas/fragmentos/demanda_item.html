@@ -1,0 +1,16 @@
+{#} /home/bruno/demando/demandas/templates/demandas/fragmentos/demanda_item.htmll {#}
+
+<div class="p-4 bg-gray-100 rounded mb-4 flex items-center justify-between">
+    <div>
+        <h3 class="font-bold">{{ demanda.titulo }}</h3>
+        <p>{{ demanda.descricao }}</p>
+        <p class="text-sm text-gray-500">Criado em: {{ demanda.criado_em }}</p>
+    </div>
+    <div>
+        {% if not demanda.concluido %}
+            <button hx-post="{% url 'marcar_concluido' demanda.id %}" hx-target="this" hx-swap="outerHTML" class="bg-green-500 hover:bg-green-600 text-white py-1 px-3 rounded">Marcar como Concluído</button>
+        {% else %}
+            <span class="text-green-600 font-semibold">Concluído</span>
+        {% endif %}
+    </div>
+</div>

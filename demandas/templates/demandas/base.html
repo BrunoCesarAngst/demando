@@ -1,0 +1,103 @@
+{#} /home/bruno/demando/demandas/templates/demandas/base.html {#}
+
+<!DOCTYPE html>
+{% load static %}
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demando - Gerenciador de Tarefas</title>
+    <link href="{% static 'css/tailwind.css' %}" rel="stylesheet">
+    <script src="https://unpkg.com/htmx.org@1.6.1"></script>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+        }
+        header {
+            background-color: #007bff;
+            color: #fff;
+            padding: 1rem;
+            text-align: center;
+        }
+        .logo {
+            max-width: 100px; /* Limita o tamanho máximo da logo */
+            max-height: 100px;
+            border-radius: 50%;
+            background-color: #ffffff; /* Troque pelo fundo desejado */
+            padding: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        footer {
+            margin-top: 2rem;
+            padding: 1rem;
+            text-align: center;
+            background-color: #f8f9fa;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header + Navbar -->
+    <header class="bg-blue-600 text-white py-4 shadow-md sticky top-0 z-50">
+        <div class="container mx-auto flex justify-between items-center px-6">
+            <!-- Logo e Título -->
+            <div class="flex items-center space-x-3">
+                <a href="/" class="flex items-center hover:text-gray-200">
+                    <img src="{% static 'images/logo.png' %}" alt="Logo" class="logo mr-2">
+                </a>
+            </div>
+
+            <!-- Links de Navegação Principais -->
+            <nav class="md:flex items-center space-x-6">
+                {% if user.is_authenticated %}
+                    <span class="px-4 py-2 text-lg font-semibold">
+                        Olá, {{ user.username|title }} bem vindo ao Demando!
+                    </span>
+                    <a href="/demandas/" class="px-3 py-2 rounded-md text-lg font-medium hover:bg-blue-500 transition duration-200">Demandas</a>
+                    <a href="/demandas/editar-todas/" class="px-3 py-2 rounded-md text-lg font-medium hover:bg-blue-500 transition duration-200">Editar Demandas</a>
+                    <a href="{% url 'logout' %}" class="bg-red-500 hover:bg-red-600 text-white px-5 py-2 rounded-md font-semibold transition duration-300">Sair</a>
+                {% else %}
+                    <a href="{% url 'login' %}" class="bg-green-500 hover:bg-green-600 text-white px-5 py-2 rounded-md font-semibold transition duration-300">Entrar</a>
+                    <a href="{% url 'cadastro' %}" class="bg-blue-500 hover:bg-blue-600 text-white px-5 py-2 rounded-md font-semibold transition duration-300">Cadastre-se</a>
+                {% endif %}
+            </nav>
+        </div>
+    </header> 
+
+    <main class="container mx-auto p-4">
+        {% block conteudo %}{% endblock %}
+    </main>
+
+    <footer class="bg-gray-800 text-white py-4">
+        <p>&copy; 2024 Demando - Organize suas tarefas com eficiência</p>
+    </footer>
+
+    <!-- Adicionar o JavaScript para htmx e CSRF -->
+    <script>
+        // Configuração para adicionar o CSRF Token nas requisições htmx
+        document.body.addEventListener('htmx:configRequest', (event) => {
+            const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+            if (csrfToken) {
+                event.detail.headers['X-CSRFToken'] = csrfToken;
+            }
+        });
+
+        // Controle do menu mobile
+        document.getElementById('nav-toggle').addEventListener('click', function() {
+            const navMenu = document.getElementById('nav-menu');
+            navMenu.classList.toggle('hidden');
+        });
+
+        // Controle do menu mobile
+        document.addEventListener('DOMContentLoaded', function() {
+            const navToggle = document.getElementById('nav-toggle');
+            const navMenu = document.getElementById('nav-menu');
+
+            navToggle.addEventListener('click', function() {
+                navMenu.classList.toggle('hidden');
+            });
+        });
+    </script>
+</body>
+</html>

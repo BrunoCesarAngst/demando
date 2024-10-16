@@ -1,0 +1,17 @@
+{#} /home/bruno/demando/demandas/templates/demandas/cadastro.html {#}
+
+{% extends 'demandas/base.html' %}
+
+{% block conteudo %}
+<div class="bg-white rounded-lg shadow p-6 max-w-md mx-auto">
+    <h2 class="text-xl font-semibold mb-4">Cadastro de Novo Usuário</h2>
+    <form method="POST" action="{% url 'cadastro' %}" class="space-y-4">
+        {% csrf_token %}
+        <input type="text" name="username" placeholder="Nome de Usuário" class="border p-2 w-full rounded">
+        <input type="email" name="email" placeholder="Email" class="border p-2 w-full rounded">
+        <input type="password" name="password" placeholder="Senha" class="border p-2 w-full rounded">
+        <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded">Cadastrar</button>
+    </form>
+</div>
+{% endblock %}
+

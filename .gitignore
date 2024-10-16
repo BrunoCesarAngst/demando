@@ -1,0 +1,101 @@
+# Python
+*.py[cod]
+__pycache__/
+*.so
+
+# Environments
+.env
+venv/
+meu_ambiente/
+
+# Django
+*.log
+*.pot
+*.pyc
+*.pyo
+local_settings.py
+media/
+staticfiles/
+
+# Database
+*.sqlite3
+
+# VS Code
+.vscode/
+
+# macOS
+.DS_Store
+
+# Byte-compiled / optimized / DLL files
+*.py[cod]
+*.py
+__pycache__/
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+*.cover
+.cache
+nosetests.xml
+coverage.xml
+*.coveragerc
+*.egg
+*.eggs
+MANIFEST
+
+# Distribution / packaging
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Sphinx documentation
+docs/_build/
+
+# PyInstaller
+#  Usually these files are written by a python script from a template
+*.manifest
+*.spec
+
+# Pytest
+.cache/
+
+# MyPy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# dotenv
+env/
+.env.*
+*.env
+
+# Coverage reports
+htmlcov/
+.coverage
+*.cover
+
+# Pytest cache
+.pytest_cache/
+
+# Editor directories
+.idea/
+*.swp
+*.swo
+*~
+
+# System files
+Thumbs.db
+.DS_Store
+*.bak

@@ -1,0 +1,41 @@
+<!-- /home/bruno/demando/demandas/templates/demandas/lista_demandas.html -->
+
+{% extends 'demandas/base.html' %}
+
+{% block conteudo %}
+<div class="bg-white rounded-lg shadow p-6 mb-6">
+    <!-- Adicionando o formulário de criação de demanda -->
+    {% include 'demandas/fragmentos/formulario_demandas.html' %}
+    
+    <h2 class="text-xl font-semibold mb-4">Suas Demandas</h2>
+    <div id="lista-demandas">
+        {% for demanda in demandas %}
+            <div class="p-4 bg-gray-100 rounded mb-4 flex items-center justify-between">
+                <div>
+                    <!-- Link para a tela de edição da demanda -->
+                    <a href="{% url 'editar_demanda' demanda.id %}" class="font-bold text-blue-600 hover:underline">
+                        {{ demanda.titulo }}
+                    </a>
+                    <p>{{ demanda.descricao }}</p>
+                    <p class="text-sm text-gray-500">Criado em: {{ demanda.criado_em }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <!-- Paginação -->
+    <div class="flex justify-between mt-4">
+        {% if demandas.has_previous %}
+            <button hx-get="?page={{ demandas.previous_page_number }}" hx-target="#lista-demandas" hx-swap="innerHTML" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded">
+                Anterior
+            </button>
+        {% endif %}
+
+        {% if demandas.has_next %}
+            <button hx-get="?page={{ demandas.next_page_number }}" hx-target="#lista-demandas" hx-swap="innerHTML" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded">
+                Próxima
+            </button>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
