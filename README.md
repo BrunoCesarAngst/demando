@@ -1,140 +1,130 @@
-# Demando - Gerenciador de Demandas e Tarefas
+# Demando
 
-Bem-vindo ao **Demando**, um aplicativo de gerenciador de tarefas e demandas desenvolvido em Django com Django Rest Framework (DRF) e com a documentação interativa usando `drf_yasg`. Este projeto foi criado para ajudar a organizar tarefas pessoais e colaborativas, permitindo o gerenciamento eficiente de demandas.
+Aplicação web para gestão de demandas e tarefas, construída com Django e uma API REST documentada.
 
-## Sumário
+O projeto concentra-se em um problema recorrente de sistemas de trabalho: registrar responsabilidades, acompanhar o estado das demandas e oferecer diferentes superfícies de uso sem duplicar a lógica central.
 
-1. [Introdução](#introdução)
-2. [Tecnologias Utilizadas](#tecnologias-utilizadas)
-3. [Funcionalidades](#funcionalidades)
-4. [Instalação e Configuração](#instalação-e-configuração)
-5. [Como Executar o Projeto](#como-executar-o-projeto)
-6. [Documentação da API](#documentação-da-api)
-7. [Estrutura do Projeto](#estrutura-do-projeto)
-8. [Como Contribuir](#como-contribuir)
-9. [Licença](#licença)
+## Visão do sistema
 
-## Introdução
+Demando combina:
 
-O **Demando** é uma aplicação web para gestão de tarefas que permite aos usuários criar, editar e organizar suas demandas. Ele foi desenvolvido com foco em simplicidade e eficiência, visando tanto o uso pessoal quanto a colaboração em equipe.
+- interface web para operação cotidiana;
+- autenticação de usuários;
+- criação, edição e conclusão de demandas;
+- API REST para integração;
+- documentação interativa dos endpoints;
+- área administrativa fornecida pelo ecossistema Django.
 
-## Tecnologias Utilizadas
+## Arquitetura
 
-- **Python 3.10**
-- **Django 5.1.2**: Framework web utilizado para o desenvolvimento do backend.
-- **Django Rest Framework (DRF)**: Utilizado para a criação da API REST.
-- **drf_yasg**: Geração da documentação da API usando Swagger e ReDoc.
-- **SQLite**: Banco de dados padrão para armazenamento local durante o desenvolvimento.
-- **HTMX**: Para interações dinâmicas na interface do usuário.
-- **Tailwind CSS**: Utilizado para estilização e criação de uma interface responsiva.
+```mermaid
+flowchart LR
+    U[Usuário] --> H[Interface HTML / HTMX]
+    C[Cliente externo] --> A[API REST]
+    H --> D[Django]
+    A --> R[Django REST Framework]
+    D --> M[Modelo de demandas]
+    R --> M
+    M --> B[(Banco de dados)]
+    A --> S[Swagger / ReDoc]
+```
 
-## Funcionalidades
+## Stack
 
-- **Autenticação de Usuário**: Cadastro, login e logout de usuários.
-- **CRUD de Demandas**: Criação, edição, exclusão e visualização de demandas.
-- **Marcar como Concluído**: Opção de marcar demandas como concluídas.
-- **Paginas de Documentação da API**: Visualização interativa da documentação usando Swagger ou ReDoc.
-- **Interface Responsiva**: Navegação simples para dispositivos móveis e desktop.
+**Aplicação**  
+`Python 3.10` · `Django 5.1` · templates Django · `HTMX`
 
-## Instalação e Configuração
+**API**  
+`Django REST Framework` · `drf-yasg` · Swagger · ReDoc
 
-Siga os passos abaixo para configurar o ambiente de desenvolvimento local:
+**Persistência e configuração**  
+`SQLite` · `python-dotenv`
 
-1. **Clone o repositório**:
-   ```bash
-   git clone https://github.com/seu-usuario/demando.git
-   cd demando
-   ```
+## Capacidades
 
-2. **Crie e ative um ambiente virtual**:
-   ```bash
-   python3 -m venv meu_ambiente
-   source meu_ambiente/bin/activate  # No Windows: meu_ambiente\Scripts\activate
-   ```
+- cadastro, login e logout;
+- criação e edição de demandas;
+- conclusão e exclusão de tarefas;
+- visualização organizada dos registros;
+- API REST para acesso programático;
+- documentação navegável da API;
+- administração do sistema;
+- interface adaptável para desktop e dispositivos móveis.
 
-3. **Instale as dependências**:
-   ```bash
-   pip install -r requirements.txt
-   ```
+## Estrutura
 
-4. **Crie o arquivo `.env`** com as variáveis de ambiente necessárias:
-   ```env
-   AMBIENTE=desenvolvimento
-   SECRET_KEY=sua_chave_secreta_aqui
-   DEBUG=True
-   ```
+```text
+/
+├── demandas/
+│   ├── migrations/       # evolução do schema
+│   ├── templates/        # interface web
+│   ├── urls.py           # rotas do domínio
+│   └── views.py          # comportamento da aplicação
+├── demando/
+│   ├── settings.py       # configuração
+│   └── urls.py           # composição das rotas
+├── requirements.txt
+└── manage.py
+```
 
-5. **Realize as migrações**:
-   ```bash
-   python manage.py migrate
-   ```
-
-6. **Crie um superusuário** para acessar a área administrativa:
-   ```bash
-   python manage.py createsuperuser
-   ```
-
-## Como Executar o Projeto
-
-Para iniciar o servidor de desenvolvimento, execute o comando:
+## Execução local
 
 ```bash
+git clone https://github.com/BrunoCesarAngst/demando.git
+cd demando
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+```
+
+Crie um arquivo `.env`:
+
+```env
+AMBIENTE=desenvolvimento
+SECRET_KEY=defina-uma-chave-local
+DEBUG=True
+```
+
+Prepare o banco e inicie a aplicação:
+
+```bash
+python manage.py migrate
+python manage.py createsuperuser
 python manage.py runserver
 ```
 
-Acesse a aplicação em: [http://127.0.0.1:8000/](http://127.0.0.1:8000/)
+Aplicação: `http://127.0.0.1:8000/`
 
 ## Documentação da API
 
-A documentação interativa da API está disponível nos seguintes links:
+- Swagger UI: `http://127.0.0.1:8000/swagger/`
+- ReDoc: `http://127.0.0.1:8000/redoc/`
 
-- **Swagger UI**: [http://127.0.0.1:8000/swagger/](http://127.0.0.1:8000/swagger/)
-- **ReDoc**: [http://127.0.0.1:8000/redoc/](http://127.0.0.1:8000/redoc/)
+A documentação interativa permite inspecionar contratos e testar endpoints durante o desenvolvimento.
 
-Essas páginas oferecem uma interface interativa para testar todos os endpoints da API e verificar suas funcionalidades.
+## Decisões de engenharia demonstradas
 
-## Estrutura do Projeto
+- uma camada de domínio atendendo interface e API;
+- rotas separadas por responsabilidade;
+- migrações versionadas para evolução dos dados;
+- configuração sensível fora do código;
+- documentação gerada a partir da API;
+- uso da administração do Django como ferramenta operacional;
+- possibilidade de evolução gradual do front-end sem substituir o back-end.
 
-Abaixo, uma breve descrição dos diretórios e arquivos principais:
+## Possíveis evoluções
 
-```
-/
-|-- demandas/                 # Aplicativo principal
-|   |-- migrations/           # Migrações do banco de dados
-|   |-- templates/            # Templates HTML
-|   |-- urls.py               # Definição das URLs do app demandas
-|   |-- views.py              # Lógica das views
-|-- demando/
-|   |-- settings.py           # Configurações do projeto
-|   |-- urls.py               # Definição das URLs principais
-|-- requirements.txt          # Dependências do projeto
-|-- manage.py                 # Ponto de entrada para comandos do Django
-```
+- substituir SQLite por PostgreSQL em ambientes compartilhados;
+- introduzir testes automatizados de domínio e API;
+- adicionar filtros, prioridades e responsáveis;
+- criar trilha de auditoria para mudanças de estado;
+- modelar permissões mais granulares;
+- preparar execução conteinerizada.
 
-## Como Contribuir
+## Estado do projeto
 
-Contribuições são bem-vindas! Siga os passos abaixo para contribuir com o projeto:
-
-1. **Faça um fork do repositório**.
-2. **Crie uma nova branch** para sua feature ou correção:
-   ```bash
-   git checkout -b minha-feature
-   ```
-3. **Implemente sua funcionalidade**.
-4. **Faça o commit de suas alterações**:
-   ```bash
-   git commit -m "Adiciona minha nova feature"
-   ```
-5. **Faça push para sua branch**:
-   ```bash
-   git push origin minha-feature
-   ```
-6. **Abra um Pull Request** no GitHub.
-
-## Licença
-
-Este projeto é licenciado sob a licença BSD. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+Projeto público de portfólio e estudo aplicado. Seu valor principal está em demonstrar organização de domínio, API documentada e uso integrado do ecossistema Django.
 
 ---
-Esperamos que este README ajude a orientar e facilitar o uso e contribuição ao projeto Demando. Em caso de dúvidas, sinta-se à vontade para abrir uma *issue* ou entrar em contato! Feliz codificação! ✌️
 
+[Perfil de Bruno César Angst](https://github.com/BrunoCesarAngst) · [Site](https://brunoangst.com.br/)
