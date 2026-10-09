@@ -14,6 +14,17 @@ O projeto concentra-se em um problema recorrente de sistemas de trabalho: regist
 
 **Como verificar:** examine `demandas/`, `demando/` e inicie o servidor local conforme os passos abaixo.
 
+## Evidências no código (inspeção de outubro de 2026)
+
+| Funcionalidade encontrada | Onde conferir | Limite da evidência |
+| --- | --- | --- |
+| Modelo de demanda com título, descrição, datas, usuário proprietário e indicador de conclusão | [models.py](demandas/models.py) | Persistência modelada; sem volume real de registros |
+| Listagem com paginação de dez itens por página e resposta parcial para requisições HTMX | [views.py](demandas/views.py) | Paginação configurada; sem medição de performance |
+| Cadastro, autenticação e criação de demandas vinculadas ao usuário autenticado | [views.py](demandas/views.py) | Os fluxos foram identificados no código; autorização por objeto exige revisão |
+| Estrutura de testes Django | [tests.py](demandas/tests.py) | **Ainda não há casos de teste implementados nesse arquivo** |
+
+**Resultado demonstrável:** aplicação de gestão de demandas com modelo, views e interface/API documentadas. **Atenção técnica:** revisar proteção CSRF e controles de autorização antes de qualquer uso real.
+
 ## Visão do sistema
 
 Demando combina:
