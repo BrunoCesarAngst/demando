@@ -4,6 +4,16 @@ Aplicação web para gestão de demandas e tarefas, construída com Django e uma
 
 O projeto concentra-se em um problema recorrente de sistemas de trabalho: registrar responsabilidades, acompanhar o estado das demandas e oferecer diferentes superfícies de uso sem duplicar a lógica central.
 
+## Em um minuto: problema, solução e evidências
+
+- **Problema:** gerir demandas por interface web e API sem duplicar a lógica de domínio.
+- **Escopo do projeto:** aplicação pública de estudo aplicado; sem alegações de adoção comercial.
+- **Solução documentada:** aplicação Django com autenticação, operações de demandas, API REST e documentação interativa.
+- **Tecnologias:** Python, Django, Django REST Framework, HTMX, SQLite e Swagger/ReDoc.
+- **Resultado verificável:** estrutura de aplicação, dependências em [requirements.txt](requirements.txt) e rotas de documentação descritas neste README. Não há resultado operacional quantificado.
+
+**Como verificar:** examine `demandas/`, `demando/` e inicie o servidor local conforme os passos abaixo.
+
 ## Visão do sistema
 
 Demando combina:
