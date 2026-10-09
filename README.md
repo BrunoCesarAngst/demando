@@ -1,5 +1,9 @@
 # Demando
 
+> **Status: projeto independente histórico, sem manutenção ativa.** Esta é a implementação preservada do estudo de gestão de demandas. Não é anunciado como serviço disponível, produto finalizado ou aplicação segura para uso em produção.
+
+**O que pode ser avaliado:** [modelo de demandas](demandas/models.py), [fluxos de autenticação, listagem e operações](demandas/views.py) e [rotas da aplicação](demandas/urls.py). Há pendências de testes e autorização documentadas abaixo; não é necessário executar o sistema para compreender o escopo desenvolvido.
+
 Aplicação web para gestão de demandas e tarefas, construída com Django e uma API REST documentada.
 
 O projeto concentra-se em um problema recorrente de sistemas de trabalho: registrar responsabilidades, acompanhar o estado das demandas e oferecer diferentes superfícies de uso sem duplicar a lógica central.
@@ -61,7 +65,7 @@ flowchart LR
 **Persistência e configuração**  
 `SQLite` · `python-dotenv`
 
-## Capacidades
+## Funcionalidades presentes ou descritas no código
 
 - cadastro, login e logout;
 - criação e edição de demandas;
@@ -144,7 +148,7 @@ A documentação interativa permite inspecionar contratos e testar endpoints dur
 
 ## Estado do projeto
 
-Projeto público de portfólio e estudo aplicado. Seu valor principal está em demonstrar organização de domínio, API documentada e uso integrado do ecossistema Django.
+Projeto independente interrompido e preservado como registro de aprendizado e implementação. Demonstra modelagem, views, API e uso integrado do ecossistema Django, mas não foi validado aqui como produto pronto para produção.
 
 ---
 
